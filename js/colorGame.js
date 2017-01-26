@@ -1,27 +1,44 @@
 var colors = generateColors(6);
-
 var squares = document.querySelectorAll(".square");
 var pickedColor = pickColor();
 var colorDisplay = document.getElementById("colorDisplay");
-var message = document.getElementById("message");
-var h1 = document.querySelector("h1");
-
 colorDisplay.textContent = pickedColor;
+var messageDisplay = document.getElementById("message");
+var h1 = document.querySelector("h1");
+var resetButton = document.getElementById("reset");
+
+resetButton.addEventListener("click", function(){
+    
+    colors = generateColors(6);
+    pickedColor = pickColor();
+    colorDisplay.textContent = pickedColor;
+    h1.style.background = "#232323";
+    resetButton.textContent = "New Colors";
+    messageDisplay.textContent = "";
+    for(var i=0; i<squares.length;i++){
+        squares[i].style.background = colors[i];
+    }
+    
+});
+
 
 for(var i=0; i<squares.length;i++){
+    
     squares[i].style.background = colors[i];
-
+    
     squares[i].addEventListener("click", function(){
         var clickedColor = this.style.background;
         if(clickedColor === pickedColor){
-            message.textContent = "Correct!";
+            messageDisplay.textContent = "Correct!";
+            resetButton.textContent = "Play again?";
             h1.style.background = clickedColor;
             changeColors(clickedColor);
         }else{
             this.style.background = "#232323";
-            message.textContent = "Try again!";
+            messageDisplay.textContent = "Try again!";
         }
-    })
+    });
+
 }
 
 function changeColors(color){
