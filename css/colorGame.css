@@ -25,3 +25,7 @@ h1{
     text-align: center;
     height: 30px;
 }
+
+.selected{
+    background: blue;
+}
